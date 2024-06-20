@@ -4,7 +4,6 @@ from multiprocessing import cpu_count
 from psutil import virtual_memory
 from basecall_nanopore_dorado_methods import Methods
 from importlib.resources import files
-from kits import Kits
 from conda_methods import CondaMethods
 
 # pandas=2.2.2 psutil=5.9.8

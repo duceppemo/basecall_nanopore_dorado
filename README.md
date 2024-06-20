@@ -1,7 +1,9 @@
 # Basecall Nanopore Dorado
 
 ## Description
-This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC) and filtering (Filtlong).
+This is a wrapper script to streamline nanopore basecalling using `dorado`. It will also perform read QC (pycoQC) and filtering (Filtlong).
+
+Under the hood, it's using `dorado_basecall_server` + `ont_basecall_client` rather than the standalone `dorado' (https://github.com/nanoporetech/dorado). The rationale behind using the basecall server is that can take both fast5 and pod5 as input, performs sample demultuplexing and outputs fastq with "complete" headers (needed for pycoQC).
 
 ## Important notes
 - This script will only work in "Linux".
@@ -96,12 +98,19 @@ options:
   -m 114, --memory 114  Memory in GB. Default is 85% of total memory (114). Optional.
   -v, --version         show program's version number and exit
 ```
-## Examples
+## Sample description file
+- When the `--description` argument is being used, demultiplexed fastq will be renamed. It's important to know that any barcode detected that are not listed in your `sample description` file will be deleted. The `unclassified` folder is being kept, but not used at the filtering step.
 - Look at  the file `sample_description.tsv` file in the `/data` folder for a template for the `--description` argument.
-- If you're having trouble getting a working value for the config file name, barcoding kit, library kit or flowcell, \
-you can have a peak at the `kits.py` file content, which contains all the valid names. This file needs to be updated as \
-kits come and go. Please file an issue is you specific kit is not listed and should be. Note that Dorado is not compatible \
-sith some older kits.
+- File format is two tab-separated colums. First column must be the barcode numbers from `barcode01` up to `barcode96`. Second colum is your prefered sample name. Don't use spaces or any special characters (`_` and `-` are OK).
+```text
+barcode01	my_sample1
+barcode02	my_sample2
+barcode03	my_sample3
+barcode04	my_sample4
+```
+
+## Examples
+- If you're having trouble getting a working value for the config file name, barcoding kit, library kit or flowcell, you can have a peak at the `kits.py` file content, which contains all the valid names. This file needs to be updated as kits come and go. Please file an issue is you specific kit is not listed and should be. Note that Dorado is not compatible with some older kits.
 
 ### Fast5 generated from a multiplexed run with a R9.4.1 flowcell:
 ```bash
