@@ -4,7 +4,6 @@ from multiprocessing import cpu_count
 from psutil import virtual_memory
 from basecall_nanopore_dorado_methods import Methods
 from importlib.resources import files
-import shutil
 from kits import Kits
 from conda_methods import CondaMethods
 
@@ -13,6 +12,7 @@ from conda_methods import CondaMethods
 
 __author__ = 'duceppemo'
 __version__ = '0.1'
+
 
 class Basecaller(object):
     def __init__(self, args):
