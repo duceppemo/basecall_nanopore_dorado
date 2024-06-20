@@ -56,8 +56,8 @@ python basecall_nanopore_dorado.py -h
 ```
 ## Usage
 ```commandline
-usage: python basecall_nanopore_dorado.py [-h] -i /path/to/input_folder/ -o /path/to/output_folder/ [-s {minion,promethion}] [-c dna_r9.4.1_450bps_sup.cfg] [-f FLO-MIN106] [-l SQK-LSK109]
-                                          [-b EXP-NBD104 [EXP-NBD104 ...]] [-d /path/to/barcode_description.tsv] [--min-qscore MIN_QSCORE] [--port PORT] [-r] [-t 24] [-g "cuda:0"] [-p 2] [-m 114] [-v]
+usage: python basecall_nanopore_dorado.py [-h] -i /path/to/input_folder/ -o /path/to/output_folder/ [-s {minion,promethion}] [-c dna_r9.4.1_450bps_sup.cfg] [-f FLO-MIN106] [-l SQK-LSK109] [-b EXP-NBD104 [EXP-NBD104 ...]] [-d /path/to/barcode_description.tsv] [--min-qscore MIN_QSCORE]
+                                          [--port PORT] [-r] [-t 24] [-g "cuda:0"] [-p 2] [-m 114] [-v]
 
 Basecall Nanopore raw data to fastq using Dorado Basecall Server.
 
@@ -70,22 +70,19 @@ options:
   -s {minion,promethion}, --sequencer {minion,promethion}
                         Sequencer used. "minion" includes all sequencers except "promethion". Optional. Default is "minion".
   -c dna_r9.4.1_450bps_sup.cfg, --config dna_r9.4.1_450bps_sup.cfg
-                        Guppy config file. Typically found in "/opt/ont/guppy/data" ending with ".cfg". This is the prefered methods over choosing a "library kit/flowcell" combination. Both methods are
-                        uncompatible. Optional.
+                        Dorado config file. Typically found in dorado installation folder and ending with ".cfg". This is the preferred methods over choosing a "library kit/flowcell" combination. Both methods are incompatible. Optional.
   -f FLO-MIN106, --flowcell FLO-MIN106
                         Flowcell type used for sequencing. Optional.
   -l SQK-LSK109, --library-kit SQK-LSK109
                         Library kit used. Optional.
   -b EXP-NBD104 [EXP-NBD104 ...], --barcode-kit EXP-NBD104 [EXP-NBD104 ...]
-                        Barcoding kit(s) used. Use "unknown" if you know barcodes were used, but do not know which kit. Not using this option will not perform barcode splitting. For multiple barcoding kits,
-                        use double quotes and space like this: "EXP-NBD104 EXP-NBA114". Optional
+                        Barcoding kit(s). Not using this option will not perform barcode splitting. For multiple barcoding kits, use double quotes and space like this: "EXP-NBD104 EXP-NBA114". Optional
   -d /path/to/barcode_description.tsv, --description /path/to/barcode_description.tsv
-                        Tab-separated file with two columns with barcode assignments. First column contains barcode names [barcode01, barcode02, etc.]. Second column contains sample name. Avoid using special
-                        character. Sample file in data folder. Optional.
+                        Tab-separated file with two columns with barcode assignments. First column contains barcode names [barcode01, barcode02, etc.]. Second column contains sample name. Avoid using special characters. Sample file in data folder. Optional.
   --min-qscore MIN_QSCORE
                         Minimum acceptable qscore for a read to be filtered into the PASS folder. Accepted values: [0 .. 30]. Default 10. Optional.
   --port PORT           Port for basecalling service. Default 5555. Optional.
-  -r, --recursive       Look for fast5 recursively. Useful if fast5 are in multiple sub-folders. Optional
+  -r, --recursive       Look for pod5 or fast5 recursively. Optional
   -t 24, --threads 24   Number of threads. Default is maximum available(24). Optional.
   -g "cuda:0", --gpu "cuda:0"
                         GPU device to use. Typically use "cuda:0". Default is "auto". Optional.

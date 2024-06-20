@@ -207,9 +207,9 @@ if __name__ == "__main__":
                              'Optional. Default is "minion".')
     parser.add_argument('-c', '--config', metavar='dna_r9.4.1_450bps_sup.cfg',
                         required=False, type=str,
-                        help='Guppy config file. Typically found in "/opt/ont/guppy/data" ending with ".cfg". '
-                             'This is the prefered methods over choosing a "library kit/flowcell" combination. '
-                             'Both methods are uncompatible. Optional.')
+                        help='Dorado config file. Typically found in dorado installation folder and ending with ".cfg".'
+                             ' This is the preferred methods over choosing a "library kit/flowcell" combination. '
+                             'Both methods are incompatible. Optional.')
     parser.add_argument('-f', '--flowcell', metavar='FLO-MIN106',
                         required=False, type=str,
                         help='Flowcell type used for sequencing. Optional.')
@@ -218,14 +218,13 @@ if __name__ == "__main__":
                         help='Library kit used. Optional.')
     parser.add_argument('-b', '--barcode-kit', metavar='EXP-NBD104',
                         required=False, type=str, nargs='+',
-                        help='Barcoding kit(s) used. Use "unknown" if you know barcodes were used, but do not know '
-                             'which kit. Not using this option will not perform barcode splitting. For multiple '
+                        help='Barcoding kit(s). Not using this option will not perform barcode splitting. For multiple '
                              'barcoding kits, use double quotes and space like this: "EXP-NBD104 EXP-NBA114". Optional')
     parser.add_argument('-d', '--description', metavar='/path/to/barcode_description.tsv',
                         required=False, type=str,
                         help='Tab-separated file with two columns with barcode assignments. '
                              'First column contains barcode names [barcode01, barcode02, etc.]. '
-                             'Second column contains sample name. Avoid using special character. '
+                             'Second column contains sample name. Avoid using special characters. '
                              'Sample file in data folder. Optional.')
     parser.add_argument('--min-qscore', type=int, default=10, required=False,
                         help='Minimum acceptable qscore for a read to be filtered into the PASS folder.	'
@@ -234,7 +233,7 @@ if __name__ == "__main__":
                         help='Port for basecalling service. Default 5555. Optional.')
     parser.add_argument('-r', '--recursive',
                         action='store_true',
-                        help='Look for fast5 recursively. Useful if fast5 are in multiple sub-folders. Optional')
+                        help='Look for pod5 or fast5 recursively. Optional')
     parser.add_argument('-t', '--threads', metavar=str(max_cpu),
                         required=False, type=int, default=max_cpu,
                         help='Number of threads. Default is maximum available({}). Optional.'.format(max_cpu))
