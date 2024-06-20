@@ -3,7 +3,7 @@
 ## Description
 This is a wrapper script to streamline nanopore basecalling using `dorado`. It will also perform read QC (pycoQC) and filtering (Filtlong).
 
-Under the hood, it's using `dorado_basecall_server` + `ont_basecall_client` rather than the standalone `dorado' (https://github.com/nanoporetech/dorado). The rationale behind using the basecall server is that can take both fast5 and pod5 as input, performs sample demultuplexing and outputs fastq with "complete" headers (needed for pycoQC).
+Under the hood, it's using `dorado_basecall_server` + `ont_basecall_client` rather than the standalone `dorado` (https://github.com/nanoporetech/dorado). The rationale behind using the basecall server is that can take both fast5 and pod5 as input, performs sample demultuplexing and outputs fastq with "complete" headers (needed for pycoQC).
 
 ## Important notes
 - This script will only work in "Linux".
