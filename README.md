@@ -13,11 +13,6 @@ Under the hood, it's using `dorado_basecall_server` + `ont_basecall_client` rath
 - PycoQC integration is not implemented yet.
 - Only minimal read filtering is done (remove bottom 5%).
 
-```bash
-# How to update your $HOME/.bashrc
-# say you installed dorado basecall server in $HOME/pro
-```
-
 ## Installation
 - Miniconda installation (say "yes" to when asked automatically load conda on startup):
 ```bash
