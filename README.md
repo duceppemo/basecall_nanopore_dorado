@@ -36,20 +36,14 @@ rm -rf ~/miniconda3/miniconda.sh
 [ -d $HOME/prog ] || mkdir -p $HOME/prog
 cd $HOME/prog
 
-# Get dorado basecall server
-wget https://cdn.oxfordnanoportal.com/software/analysis/ont-dorado-server_7.3.9_linux64.tar.gz
-
-# Extract archive
-tar zxvf ont-dorado-server_7.3.9_linux64.tar.gz
-
-# Remove archive
-rm ont-dorado-server_7.3.9_linux64.tar.gz
+# Get and extract dorado basecall server
+wget https://cdn.oxfordnanoportal.com/software/analysis/ont-dorado-server_7.3.9_linux64.tar.gz  # Get dorado basecall server
+tar zxvf ont-dorado-server_7.3.9_linux64.tar.gz  # Extract archive
+rm ont-dorado-server_7.3.9_linux64.tar.gz  # Remove archive
 
 # Make sure we can call dorado from any location from terminal
 echo "export PATH=\$PATH:\$HOME/prog/ont-dorado-server/bin" | tee -a $HOME/.bashrc
-
-# Apply changes
-source $HOME/.bashrc
+source $HOME/.bashrc  # Apply changes
 ```
 * Pipeline installation:
 ```bash
