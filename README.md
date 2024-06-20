@@ -1,12 +1,10 @@
-#Basecall Nanopore Dorado
+# Basecall Nanopore Dorado
 
 ## Description
 This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC), \
 trimming (Porechop) and filtering (Filtlong).
 
-
-
-## Important note
+## Important notes
 - This script will only work in "Linux"
 - You must have conda and dorado basecall server pre-installed.
 - You need to have dorado install location added to your `.bashrc`
@@ -109,3 +107,7 @@ python basecalle_nanopore_dorado.py \
     --barcode-kit "EXP-NBD104" \
     --recursive
 ```
+If you're having trouble getting a working value for the config file name, barcoding kit, library kit or flowcell, \
+you can have a peak at the `kits.py` file content, which contains all the valid names. This file needs to be updated as \
+kits come and go. Please file an issue is you specific kit is not listed and should be. Note that Dorado is not compatible \
+sith some older kits.
