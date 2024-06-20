@@ -1,7 +1,7 @@
 # Basecall Nanopore Dorado
 
 ## Description
-This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC), filtering (Filtlong).
+This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC) and filtering (Filtlong).
 
 ## Important notes
 - This script will only work in "Linux".
