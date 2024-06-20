@@ -374,28 +374,6 @@ class Methods(object):
         subprocess.run(conda_run + cmd)  # stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
     @staticmethod
-    def run_porechop(sample, input_fastq, trimmed_folder, cpu, env):
-        conda_run = ['conda', 'run', '-n', env]
-        cmd = ['porechop',
-               '-i', input_fastq,
-               '-o', trimmed_folder + sample + '.fastq.gz',
-               '--threads', str(cpu),
-               '--check_reads', str(1000)]  # Only check adapter from 1,000 reads instead of 10,000
-
-        print('\t{}'.format(sample))
-        subprocess.run(conda_run + cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-
-    @staticmethod
-    def run_porechop_parallel(sample_dict, output_folder, cpu, parallel, env):
-        Methods.make_folder(output_folder)
-
-        with futures.ThreadPoolExecutor(max_workers=int(parallel)) as executor:
-            args = ((sample, path, output_folder, int(cpu / parallel),env )
-                    for sample, path in sample_dict.items())
-            for results in executor.map(lambda x: Methods.run_porechop(*x), args):
-                pass
-
-    @staticmethod
     def run_filtlong(sample, input_fastq, filtered_folder, env):
         print('\t{}'.format(sample))
         conda_run = ['conda', 'run', '-n', env]

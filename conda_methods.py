@@ -39,6 +39,6 @@ class CondaMethods(object):
 
     @staticmethod
     def install_nbc_env():
-        cmd = ['conda', 'create', '-y', '-n', 'nbc', 'porechop', 'filtlong', 'pigz']
+        cmd = ['conda', 'create', '-y', '-n', 'nbc', 'filtlong', 'pigz']
         subprocess.run(cmd)
 

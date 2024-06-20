@@ -1,14 +1,15 @@
 # Basecall Nanopore Dorado
 
 ## Description
-This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC), \
-trimming (Porechop) and filtering (Filtlong).
+This is a wrapper script to streamline nanopore basecalling using dorado. It will also perform read QC (pycoQC), filtering (Filtlong).
 
 ## Important notes
-- This script will only work in "Linux"
+- This script will only work in "Linux".
 - You must have conda and dorado basecall server pre-installed.
-- You need to have dorado install location added to your `.bashrc`
+- You need to have dorado install location added to your `.bashrc`.
 - The other dependencies will be automatically installed via conda during runtime, the first time.
+- PycoQC integration is not implemented yet.
+- Only minimal read filtering is done (remove bottom 5%).
 
 ```bash
 # How to update your $HOME/.bashrc
@@ -95,9 +96,14 @@ options:
   -m 114, --memory 114  Memory in GB. Default is 85% of total memory (114). Optional.
   -v, --version         show program's version number and exit
 ```
-
 ## Examples
-Basecalling fast5 generated from a multiplexed run with a R9.4.1 flowcell:
+- Look at  the file `sample_description.tsv` file in the `/data` folder for a template for the `--description` argument.
+- If you're having trouble getting a working value for the config file name, barcoding kit, library kit or flowcell, \
+you can have a peak at the `kits.py` file content, which contains all the valid names. This file needs to be updated as \
+kits come and go. Please file an issue is you specific kit is not listed and should be. Note that Dorado is not compatible \
+sith some older kits.
+
+### Fast5 generated from a multiplexed run with a R9.4.1 flowcell:
 ```bash
 python basecalle_nanopore_dorado.py \
     --input "/data/run1/fast5" \
@@ -107,7 +113,13 @@ python basecalle_nanopore_dorado.py \
     --barcode-kit "EXP-NBD104" \
     --recursive
 ```
-If you're having trouble getting a working value for the config file name, barcoding kit, library kit or flowcell, \
-you can have a peak at the `kits.py` file content, which contains all the valid names. This file needs to be updated as \
-kits come and go. Please file an issue is you specific kit is not listed and should be. Note that Dorado is not compatible \
-sith some older kits.
+### Pod5 generated from a multiplexed run with a R10.4.1 flowcell and v14 chemistry:
+```bash
+python basecalle_nanopore_dorado.py \
+    --input "/data/run2/pod5" \
+    --output "$HOME/analyses/run2_dorado" \
+    --config "dna_r10.4.1_e8.2_400bps_5khz_sup.cfg" \
+    --description "/data/run2/bc.txt" \
+    --barcode-kit "SQK-NBD114-24" \
+    --recursive
+```

@@ -14,6 +14,8 @@ __author__ = 'duceppemo'
 __version__ = '0.1'
 
 
+# TODO: create log of versions and time stamps for QA
+
 class Basecaller(object):
     def __init__(self, args):
         # I/O
@@ -95,14 +97,12 @@ class Basecaller(object):
         # Step completion report files
         done_basecalling = self.output_folder + '/done_basecalling'
         done_qc = self.output_folder + '/done_QC'
-        done_trimming = self.output_folder + '/done_trimming'
         done_filtering = self.output_folder + '/done_filtering'
 
         # Output folders to create
         basecalled_folder = self.output_folder + '/1_basecalled/'
         qc_folder = self.output_folder + '/2_qc/'
-        trimmed_folder = self.output_folder + '/3_trimmed/'
-        filtered_folder = self.output_folder + '/4_filtered/'
+        filtered_folder = self.output_folder + '/3_filtered/'
 
         # Create output folder
         Methods.make_folder(self.output_folder)
@@ -166,30 +166,14 @@ class Basecaller(object):
 
         ##################
         #
-        # 3- Trim reads
-        #
-        ##################
-
-        if not os.path.exists(done_trimming):
-            print('Removing Nanopore adapters with Porechop...')
-            Methods.run_porechop_parallel(self.sample_dict['basecalled'], trimmed_folder, self.cpu, self.parallel, 'nbc')
-            Methods.flag_done(done_trimming)
-        else:
-            print('Skipping trimming. Already done.')
-
-        # Update sample_dict after trimming
-        self.sample_dict['trimmed'] = Methods.get_files(trimmed_folder, '.fastq.gz')
-
-        ##################
-        #
-        # 4- Filter reads
+        # 3- Filter reads
         #
         ##################
 
         # Get reference size
         if not os.path.exists(done_filtering):
             print('Filtering lower quality reads with Filtlong...')
-            Methods.run_filtlong_parallel(self.sample_dict['trimmed'], filtered_folder, self.parallel, 'nbc')
+            Methods.run_filtlong_parallel(self.sample_dict['basecalled'], filtered_folder, self.parallel, 'nbc')
             Methods.flag_done(done_filtering)
         else:
             print('Skipping filtering. Already done.')
@@ -203,7 +187,6 @@ class Basecaller(object):
         #
         ##################
 
-        # Remove 'guppy_basecaller-core-dump-db' ?
         print('DONE!')
 
 
