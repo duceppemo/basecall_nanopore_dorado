@@ -24,7 +24,13 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 
 # Close and open a new terminal after installation.
-# You should see "(base)" at the beginning of your terminal line. 
+# You should see "(base)" at the beginning of your terminal line.
+
+# Set conda channels
+# https://bioconda.github.io/
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
 ```
 - Dorado Basecall Server installation:
 ```bash
@@ -43,6 +49,10 @@ source $HOME/.bashrc  # Apply changes
 ```
 * Pipeline installation:
 ```bash
+# Create a virtual environment and activate it
+conda create -n dorado python=3.10 pip
+conda activate dorado
+
 # Create folder to hold program
 [ -d $HOME/prog ] || mkdir -p $HOME/prog
 cd $HOME/prog
