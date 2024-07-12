@@ -50,7 +50,7 @@ source $HOME/.bashrc  # Apply changes
 * Pipeline installation:
 ```bash
 # Create a virtual environment and activate it
-conda create -n dorado python=3.10 pip
+conda create -n dorado python=3.10 pip psutil=6.0.0 pandas=2.2.2
 conda activate dorado
 
 # Create folder to hold program
