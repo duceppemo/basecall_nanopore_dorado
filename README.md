@@ -8,6 +8,7 @@ Under the hood, it's using `dorado_basecall_server` + `ont_basecall_client` rath
 ## Important notes
 - This script will only work in "Linux".
 - You must have conda and dorado basecall server pre-installed.
+- You must have the NVIDIA driver driver for your graphics card installed properly.
 - You need to have dorado install location added to your `.bashrc`.
 - The other dependencies will be automatically installed via conda during runtime, the first time.
 - PycoQC integration is not implemented yet.
